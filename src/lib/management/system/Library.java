@@ -7,22 +7,23 @@ import java.util.*;
 
 public class Library {
     private String libName;
-    private List <Member> members;
-    private List <Book> books;
-   // private static int totalBookCount;
+    private List<Librarian> librarian;
+    private List<Member> members;
+    private static List<Book> books;
     private static int totalBooksOut;
 
     /**
      * create a new library
+     *
      * @param libName library name
      * @param members list of library members
-     * @param books list of library books
+     * @param books   list of library books
      */
     public Library(String libName, List<Member> members, List<Book> books) {
         this.libName = libName;
         this.members = members;
         this.books = books;
-      //  totalBookCount = 0;
+        //  totalBookCount = 0;
         totalBooksOut = 0;
     }
 
@@ -40,13 +41,6 @@ public class Library {
         return members;
     }
 
-    /**
-     * update members list
-     * @param members added member(s)
-     */
-    public void updateMembers(List<Member> members) {
-        this.members = members;
-    }
 
     /**
      * @return books in the library
@@ -57,26 +51,12 @@ public class Library {
 
     /**
      * add books to the library
-     * @param books book
+     *
+     * @param bookAdded book
      */
-    public void updateBooks(List<Book> books) {
-        this.books = books;
+    public static void updateBooks(Book bookAdded) {
+        books.add(bookAdded);
     }
-
-    /**
-     * @return total number of books in the library
-     */
-//    public int getTotalBookCount() {
-//        return totalBookCount;
-//    }
-
-    /**
-     * update library book count
-     * @param bookCount number of added books
-     */
-//    public static void updateTotalBookCount(int bookCount) {
-//        totalBookCount += totalBookCount;
-//    }
 
     /**
      * @return number of borrowed books
@@ -87,10 +67,27 @@ public class Library {
 
     /**
      * update the number of borrowed books
+     *
      * @param booksOut new number of borrowed books
      */
     public static void updateTotalBooksOut(int booksOut) {
         totalBooksOut += booksOut;
     }
-}
+
+    /**
+     * remove a member from the list
+     * @param member member to be removed
+     */
+    public void removeMember(Member member) {
+        this.members.removeIf(element ->element.equals(member));
+    }
+
+    public void addMember(Member member) {
+        this.members.add(member);
+
+    }
+
+   }
+
+
 
