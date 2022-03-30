@@ -1,4 +1,5 @@
 package lib.management.system;
+import java.time.LocalDate;
 
 /**
  * Keeps track of books in the library
@@ -10,6 +11,8 @@ public class Book {
     private String title;
     private  boolean borrowedStatus;
     private String borrowerName;
+    private LocalDate borrowedDate;
+    private LocalDate returnDate;
 
     /**
      * create a new instance of a book
@@ -22,6 +25,8 @@ public class Book {
         this.title = title;
         this.borrowedStatus = false;
         this.borrowerName = null;
+        this.borrowedDate = null;
+        this.returnDate = null;
 
     }
 
@@ -67,4 +72,17 @@ public class Book {
         this.borrowerName = member;
     }
 
+    public LocalDate getBorrowedDate() {
+        return borrowedDate;
+    }
+    public void setBorrowedDate(LocalDate date) {
+        this.borrowedDate = date;
+    }
+
+    public LocalDate getReturnDate(){
+        return returnDate;
+    }
+    public void setReturnDate(LocalDate dueDate) {
+        this.returnDate = dueDate;
+    }
 }

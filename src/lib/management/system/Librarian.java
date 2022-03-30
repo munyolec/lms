@@ -6,7 +6,7 @@ import java.util.List;
 /**
  * Librarian class
  */
-public class Librarian {
+public class Librarian implements ManageLibrary{
     private int id;
     private String name;
     private List<Book> booksAdded;
@@ -39,15 +39,25 @@ public class Librarian {
     }
 
     public void addBook(Book book) {
-        this.booksAdded.add(book);
-        Library.addBooks(book);
-
+        if(booksAdded.contains(book)){
+            System.out.println("Cannot add duplicate copy");
+        }
+        else {
+            this.booksAdded.add(book);
+            Library.addBooks(book);
+        }
     }
     public void addMember(Member member) {
         this.membersAdded.add(member);
         Library.addMember(member);
-
     }
+
+    @Override
+    public void removeBook(Book book) {
+        this.booksAdded.removeIf(element ->element.equals(book));
+//        Library.removeBook(book);
+    }
+
     public void removeMember(Member member) {
         this.membersAdded.removeIf(element ->element.equals(member));
         Library.removeMember(member);

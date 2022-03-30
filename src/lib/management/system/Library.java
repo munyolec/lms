@@ -36,10 +36,9 @@ public class Library {
     /**
      * @return library member list
      */
-    public List<Member> getMembers() {
+    public static List<Member> getMembers() {
         return members;
     }
-
 
     /**
      * @return books in the library
@@ -53,7 +52,12 @@ public class Library {
      * @param bookAdded book
      */
     public static void addBooks(Book bookAdded) {
-        books.add(bookAdded);
+        if(books.contains(bookAdded)){
+            System.out.println("Cannot add duplicate copy");
+        }
+        else {
+            books.add(bookAdded);
+        }
     }
 
     /**
@@ -63,10 +67,9 @@ public class Library {
         for (Book b : books){
             if (b.isBorrowedStatus() == true){
                 totalBooksOut++;
-                System.out.println("The list of borrowed books are: " + b.getTitle());
             }
         }
-        System.out.println("Total number of borrowed books: " +totalBooksOut);
+        System.out.println("Total number of borrowed books in the library: " +totalBooksOut);
         return totalBooksOut;
     }
 

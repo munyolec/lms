@@ -1,6 +1,8 @@
 package lib.management.system;
 
 import java.util.*;
+import java.time.LocalDate;
+import java.util.function.Function;
 
 /**
  * Keeps track of lib members
@@ -8,8 +10,8 @@ import java.util.*;
  */
 
 public class Member {
-    private int id;
-    private String name;
+    private static int id;
+    private  String name;
     private List <String> booksBorrowed;
 
 
@@ -28,14 +30,14 @@ public class Member {
     /**
      * @return member id
      */
-    public int getId() {
+    public  int getId() {
         return id;
     }
 
     /**
      * @return member name
      */
-    public String getName() {
+    public  String getName() {
         return name;
     }
 
@@ -49,13 +51,27 @@ public class Member {
             this.booksBorrowed.add(booksBorrowed.getTitle());
             booksBorrowed.updateBorrowedStatus(true);
             booksBorrowed.updateBorrowerName(getName());
+            booksBorrowed.setBorrowedDate(LocalDate.now());
+            booksBorrowed.setReturnDate((LocalDate.now().plusWeeks(1)));
         }
-        else {
-            System.out.println("That book has already been borrowed");
+        else{
+            System.out.println("Book not available");
         }
+
     }
     public List<String> getBorrowedBooks(){
         return this.booksBorrowed;
+    }
+
+    public void returnBook(Book returnedBook){
+        if (returnedBook.isBorrowedStatus() == true) {
+            returnedBook.updateBorrowedStatus(false);
+            returnedBook.updateBorrowerName(null);
+            returnedBook.setBorrowedDate(null);
+            returnedBook.setReturnDate(null);
+            booksBorrowed.remove(returnedBook.getTitle());
+        }
+
     }
 
 
