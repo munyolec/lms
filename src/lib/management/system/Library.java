@@ -7,23 +7,22 @@ import java.util.*;
 
 public class Library {
     private String libName;
-    private List<Librarian> librarian;
-    private List<Member> members;
+    private  Librarian librarian;
+    private static List<Member> members;
     private static List<Book> books;
     private static int totalBooksOut;
 
     /**
      * create a new library
-     *
      * @param libName library name
      * @param members list of library members
-     * @param books   list of library books
+
      */
-    public Library(String libName, List<Member> members, List<Book> books) {
+    public Library(String libName, List<Member> members, List<Book> books, Librarian librarian) {
         this.libName = libName;
         this.members = members;
         this.books = books;
-        //  totalBookCount = 0;
+        this.librarian = librarian;
         totalBooksOut = 0;
     }
 
@@ -51,10 +50,9 @@ public class Library {
 
     /**
      * add books to the library
-     *
      * @param bookAdded book
      */
-    public static void updateBooks(Book bookAdded) {
+    public static void addBooks(Book bookAdded) {
         books.add(bookAdded);
     }
 
@@ -62,29 +60,26 @@ public class Library {
      * @return number of borrowed books
      */
     public int getTotalBooksOut() {
+        for (Book b : books){
+            if (b.isBorrowedStatus() == true){
+                totalBooksOut++;
+                System.out.println("The list of borrowed books are: " + b.getTitle());
+            }
+        }
+        System.out.println("Total number of borrowed books: " +totalBooksOut);
         return totalBooksOut;
-    }
-
-    /**
-     * update the number of borrowed books
-     *
-     * @param booksOut new number of borrowed books
-     */
-    public static void updateTotalBooksOut(int booksOut) {
-        totalBooksOut += booksOut;
     }
 
     /**
      * remove a member from the list
      * @param member member to be removed
      */
-    public void removeMember(Member member) {
-        this.members.removeIf(element ->element.equals(member));
+    public static void removeMember(Member member) {
+        members.removeIf(element ->element.equals(member));
     }
 
-    public void addMember(Member member) {
-        this.members.add(member);
-
+    public static void addMember(Member memberAdded) {
+        members.add(memberAdded);
     }
 
    }

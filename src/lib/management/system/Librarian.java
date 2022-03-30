@@ -10,6 +10,7 @@ public class Librarian {
     private int id;
     private String name;
     private List<Book> booksAdded;
+    private List<Member> membersAdded;
 
     /**
      * create a new librarian
@@ -20,6 +21,7 @@ public class Librarian {
         this.id = id;
         this.name = name;
         this.booksAdded = new ArrayList<Book>();
+        this.membersAdded = new ArrayList<Member>();
     }
 
     /**
@@ -35,11 +37,20 @@ public class Librarian {
     public String getName() {
         return name;
     }
+
     public void addBook(Book book) {
         this.booksAdded.add(book);
-        Library.updateBooks(book);
+        Library.addBooks(book);
 
-//
+    }
+    public void addMember(Member member) {
+        this.membersAdded.add(member);
+        Library.addMember(member);
+
+    }
+    public void removeMember(Member member) {
+        this.membersAdded.removeIf(element ->element.equals(member));
+        Library.removeMember(member);
     }
 
 }

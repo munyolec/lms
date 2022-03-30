@@ -45,10 +45,14 @@ public class Member {
      * @param booksBorrowed list of book borrowed
      */
     public void borrowBook(Book booksBorrowed) {
-        this.booksBorrowed.add(booksBorrowed.getTitle());
-        booksBorrowed.updateBorrowedStatus(true);
-        booksBorrowed.updateBorrowerName(getName());
-
+        if (booksBorrowed.isBorrowedStatus() == false) {
+            this.booksBorrowed.add(booksBorrowed.getTitle());
+            booksBorrowed.updateBorrowedStatus(true);
+            booksBorrowed.updateBorrowerName(getName());
+        }
+        else {
+            System.out.println("That book has already been borrowed");
+        }
     }
     public List<String> getBorrowedBooks(){
         return this.booksBorrowed;
