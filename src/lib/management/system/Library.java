@@ -5,24 +5,23 @@ import java.util.*;
  * Keeps track of library, members and books
  */
 
-public class Library {
+public class Library implements ManageLibrary {
     private String libName;
-    private  Librarian librarian;
-    private static List<Member> members;
-    private static List<Book> books;
+    private String librarian;
+    private List<Member> members;
+    private List<Book> books;
     private static int totalBooksOut;
 
     /**
      * create a new library
+     *
      * @param libName library name
-     * @param members list of library members
-
      */
-    public Library(String libName, List<Member> members, List<Book> books, Librarian librarian) {
+    public Library(String libName) {
         this.libName = libName;
-        this.members = members;
-        this.books = books;
-        this.librarian = librarian;
+        this.members = new ArrayList<Member>();
+        this.books = new ArrayList<Book>();
+        this.librarian = "";
         totalBooksOut = 0;
     }
 
@@ -36,8 +35,8 @@ public class Library {
     /**
      * @return library member list
      */
-    public static List<Member> getMembers() {
-        return members;
+    public List<Member> getMembers() {
+        return this.members;
     }
 
     /**
@@ -49,43 +48,94 @@ public class Library {
 
     /**
      * add books to the library
+     *
      * @param bookAdded book
      */
-    public static void addBooks(Book bookAdded) {
-        if(books.contains(bookAdded)){
+    public void addBook(Book bookAdded) {
+        if (books.contains(bookAdded)) {
             System.out.println("Cannot add duplicate copy");
-        }
-        else {
-            books.add(bookAdded);
+        } else {
+            this.books.add(bookAdded);
         }
     }
+
+    /**
+     * remove books
+     *
+     * @param book
+     */
+    public void removeBook(Book book) {
+        this.books.removeIf(element -> element.equals(book));
+    }
+
+    @Override
+
+    /**
+     * add members
+     *
+     * @param memberAdded
+     */
+    public void addMember(Member memberAdded) {
+        this.members.add(memberAdded);
+    }
+
+    /**
+     * remove a member from the list
+     *
+     * @param member member to be removed
+     */
+    public void removeMember(Member member) {
+        this.members.removeIf(element -> element.equals(member));
+    }
+
 
     /**
      * @return number of borrowed books
      */
     public int getTotalBooksOut() {
-        for (Book b : books){
-            if (b.isBorrowedStatus() == true){
+        for (Book b : books) {
+            if (b.isBorrowedStatus() == true) {
                 totalBooksOut++;
             }
         }
-        System.out.println("Total number of borrowed books in the library: " +totalBooksOut);
-        return totalBooksOut;
+        System.out.println("Borrowed books in the library: " + totalBooksOut);
+        return totalBooksOut++;
     }
 
-    /**
-     * remove a member from the list
-     * @param member member to be removed
-     */
-    public static void removeMember(Member member) {
-        members.removeIf(element ->element.equals(member));
+    public void issueBook(Member member, Book book) {
+        if (members.contains(member) && books.contains(book)) {
+                member.borrowBook(book);
+        } else {
+            System.out.println("That member or book does not exist");
+        }
     }
 
-    public static void addMember(Member memberAdded) {
-        members.add(memberAdded);
+    public List<String> getBorrowedBooks(Member member) {
+        if (members.contains(member)) {
+            return member.getBorrowedBooks();
+        }
+        return null;
     }
 
-   }
+    public void addLibrarian(String librarianName) {
+        this.librarian = librarianName;
+    }
+
+    public String getLibrarian() {
+        return librarian;
+    }
+
+    public void booksDetails() {
+        for (Book b : books) {
+            System.out.println(b.getTitle() + " Borrowed status: "
+                    + b.isBorrowedStatus() + "\nBorrower: "
+                    + b.getBorrowerName() + "\nBorrowed date: "
+                    + b.getBorrowedDate() + "\nDue date: " + b.getReturnDate());
+            System.out.println();
+        }
+    }
+}
+
 
 
 

@@ -54,7 +54,7 @@ public class Book {
     /**
      * @param borrowedStatus update book borrowed status
      */
-    public  void updateBorrowedStatus(boolean borrowedStatus) {
+    public void updateBorrowedStatus(boolean borrowedStatus) {
         this.borrowedStatus = borrowedStatus;
     }
 
@@ -84,5 +84,13 @@ public class Book {
     }
     public void setReturnDate(LocalDate dueDate) {
         this.returnDate = dueDate;
+    }
+
+    @Override
+    public String toString() {
+        return ", title='" + title + '\'' +
+                ", borrowedDate=" + borrowedDate +
+                ", returnDate=" + returnDate
+                ;
     }
 }

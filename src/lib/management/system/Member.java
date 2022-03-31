@@ -1,5 +1,7 @@
 package lib.management.system;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.*;
 import java.time.LocalDate;
 import java.util.function.Function;
@@ -10,8 +12,8 @@ import java.util.function.Function;
  */
 
 public class Member {
-    private static int id;
-    private  String name;
+    private int id;
+    private String name;
     private List <String> booksBorrowed;
 
 
@@ -37,32 +39,35 @@ public class Member {
     /**
      * @return member name
      */
-    public  String getName() {
+    public String getName() {
         return name;
     }
 
-    /**
-     * Let member borrow book
-     * update book borrowed status
-     * @param booksBorrowed list of book borrowed
-     */
-    public void borrowBook(Book booksBorrowed) {
-        if (booksBorrowed.isBorrowedStatus() == false) {
-            this.booksBorrowed.add(booksBorrowed.getTitle());
-            booksBorrowed.updateBorrowedStatus(true);
-            booksBorrowed.updateBorrowerName(getName());
-            booksBorrowed.setBorrowedDate(LocalDate.now());
-            booksBorrowed.setReturnDate((LocalDate.now().plusWeeks(1)));
-        }
-        else{
-            System.out.println("Book not available");
-        }
-
-    }
     public List<String> getBorrowedBooks(){
         return this.booksBorrowed;
     }
 
+
+    /**
+     * Let member borrow book
+     * update book borrowed status
+     * @param book list of book borrowed
+     */
+    public void borrowBook(Book book) {
+        if (getBorrowedBooks().size() < 3) {
+            if (book.isBorrowedStatus() == false) {
+                this.booksBorrowed.add(book.getTitle());
+                book.updateBorrowedStatus(true);
+                book.updateBorrowerName(getName());
+                book.setBorrowedDate(LocalDate.now());
+                book.setReturnDate((LocalDate.now().plusWeeks(1)));
+            } else {
+                System.out.println("Book has already been borrowed");
+            }
+        } else {
+            System.out.println("Borrow limit reached");
+        }
+    }
     public void returnBook(Book returnedBook){
         if (returnedBook.isBorrowedStatus() == true) {
             returnedBook.updateBorrowedStatus(false);
@@ -71,8 +76,14 @@ public class Member {
             returnedBook.setReturnDate(null);
             booksBorrowed.remove(returnedBook.getTitle());
         }
-
     }
 
-
+    @Override
+    public String toString() {
+        return
+                "id=" + this.getId() +
+                ", name='" + this.getName() + '\'' +
+                ", booksBorrowed=" + this.getBorrowedBooks()
+                ;
+    }
 }
