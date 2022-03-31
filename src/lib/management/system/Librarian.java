@@ -53,4 +53,9 @@ public class Librarian implements ManageLibrary{
         Library.removeMember(member);
 
     }
+
+    @Override
+    public void issueBook(Member member, Book book ){
+        Library.issueBook(member, book);
+    }
 }

@@ -104,7 +104,7 @@ public class Library  {
      * @param member member borrowing a book
      * @param book book being borrowed
      */
-    public void issueBook(Member member, Book book) {
+    public static void issueBook(Member member, Book book) {
         if (members.contains(member) && books.contains(book)) {
                 member.borrowBook(book);
         } else {

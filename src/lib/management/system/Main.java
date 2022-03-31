@@ -50,9 +50,9 @@ public class Main {
         System.out.println();
 
         //issue books
-        newLibrary.issueBook(member1, book1);
-        newLibrary.issueBook(member1, book2);
-        newLibrary.issueBook(member1, book3);
+        librarian.issueBook(member1, book1);
+        librarian.issueBook(member1, book2);
+        librarian.issueBook(member1, book3);
 
         //member cannot have more than 3 borrowed books
         newLibrary.issueBook(member2, book4);

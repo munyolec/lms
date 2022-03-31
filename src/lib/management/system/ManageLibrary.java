@@ -5,4 +5,5 @@ public interface ManageLibrary {
     void addMember(Member member);
     void removeBook(Book book);
     void removeMember(Member member);
+    void issueBook(Member member,Book book);
 }
