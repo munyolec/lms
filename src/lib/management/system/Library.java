@@ -48,7 +48,6 @@ public class Library implements ManageLibrary {
 
     /**
      * add books to the library
-     *
      * @param bookAdded book
      */
     public void addBook(Book bookAdded) {
@@ -61,19 +60,15 @@ public class Library implements ManageLibrary {
 
     /**
      * remove books
-     *
-     * @param book
+     * @param book book added
      */
     public void removeBook(Book book) {
         this.books.removeIf(element -> element.equals(book));
     }
 
-    @Override
-
     /**
-     * add members
-     *
-     * @param memberAdded
+     * add a member
+     * @param memberAdded member
      */
     public void addMember(Member memberAdded) {
         this.members.add(memberAdded);
@@ -88,7 +83,6 @@ public class Library implements ManageLibrary {
         this.members.removeIf(element -> element.equals(member));
     }
 
-
     /**
      * @return number of borrowed books
      */
@@ -102,6 +96,11 @@ public class Library implements ManageLibrary {
         return totalBooksOut++;
     }
 
+    /**
+     * issue a book
+     * @param member member borrowing a book
+     * @param book book being borrowed
+     */
     public void issueBook(Member member, Book book) {
         if (members.contains(member) && books.contains(book)) {
                 member.borrowBook(book);
@@ -117,15 +116,25 @@ public class Library implements ManageLibrary {
         return null;
     }
 
+    /**
+     * add a librarian name
+     * @param librarianName librarian name
+     */
     public void addLibrarian(String librarianName) {
         this.librarian = librarianName;
     }
 
+    /**
+     * @return name of librarian
+     */
     public String getLibrarian() {
         return librarian;
     }
 
-    public void booksDetails() {
+    /**
+     * show details of books in the library
+     */
+    public void booksSummary() {
         for (Book b : books) {
             System.out.println(b.getTitle() + " Borrowed status: "
                     + b.isBorrowedStatus() + "\nBorrower: "

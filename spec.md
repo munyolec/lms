@@ -1,23 +1,34 @@
-# Overview of the LMS 
+## Overview
+### Functions of Library
+* keep track of number books & members in the library 
+* add a book
+* remove a book 
+* add a member 
+* remove a member 
 
-## keep track of:
-* number of books in the library
-* books that have been borrowed
-
-# Library 
+### Library Class
 * Name
 * Members
 * Books
 * Total books borrowed
 * Total books owned
 
-# Members
+### Members Class
 * id
 * name
-* number of books borrowed
+* books borrowed
 
-# books
+### Books Class
 * id
 * title
 * borrowed_status
 * borrower_name
+* borrowed_date
+* return_date
+
+### Rules
+* a book needs to exist to borrow.
+* a book has a due return date.
+* a member can borrow a maximum of 3 books at a time.
+* a member cannot borrow a book if they have a book with
+  them past due date.

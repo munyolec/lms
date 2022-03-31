@@ -47,7 +47,6 @@ public class Member {
         return this.booksBorrowed;
     }
 
-
     /**
      * Let member borrow book
      * update book borrowed status
@@ -77,7 +76,6 @@ public class Member {
             booksBorrowed.remove(returnedBook.getTitle());
         }
     }
-
     @Override
     public String toString() {
         return
