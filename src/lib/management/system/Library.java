@@ -5,12 +5,12 @@ import java.util.*;
  * Keeps track of library, members and books
  */
 
-public class Library implements ManageLibrary {
+public class Library  {
     private String libName;
-    private String librarian;
-    private List<Member> members;
-    private List<Book> books;
-    private static int totalBooksOut;
+    private Librarian librarian;
+    private static List<Member> members;
+    private static List<Book> books;
+    private  int totalBooksOut;
 
     /**
      * create a new library
@@ -20,8 +20,8 @@ public class Library implements ManageLibrary {
     public Library(String libName) {
         this.libName = libName;
         this.members = new ArrayList<Member>();
-        this.books = new ArrayList<Book>();
-        this.librarian = "";
+        books = new ArrayList<Book>();
+        this.librarian = null;
         totalBooksOut = 0;
     }
 
@@ -50,11 +50,11 @@ public class Library implements ManageLibrary {
      * add books to the library
      * @param bookAdded book
      */
-    public void addBook(Book bookAdded) {
+    public static void addBook(Book bookAdded) {
         if (books.contains(bookAdded)) {
             System.out.println("Cannot add duplicate copy");
         } else {
-            this.books.add(bookAdded);
+            books.add(bookAdded);
         }
     }
 
@@ -62,25 +62,28 @@ public class Library implements ManageLibrary {
      * remove books
      * @param book book added
      */
-    public void removeBook(Book book) {
-        this.books.removeIf(element -> element.equals(book));
+    public static void removeBook(Book book) {
+        books.removeIf(element -> element.equals(book));
     }
 
     /**
      * add a member
      * @param memberAdded member
      */
-    public void addMember(Member memberAdded) {
-        this.members.add(memberAdded);
+    public static void addMember(Member memberAdded) {
+        if (members.contains(memberAdded)) {
+            System.out.println("Cannot add duplicate member");
+        } else {
+            members.add(memberAdded);
+        }
     }
-
     /**
      * remove a member from the list
      *
      * @param member member to be removed
      */
-    public void removeMember(Member member) {
-        this.members.removeIf(element -> element.equals(member));
+    public static void removeMember(Member member) {
+        members.removeIf(element -> element.equals(member));
     }
 
     /**
@@ -88,7 +91,7 @@ public class Library implements ManageLibrary {
      */
     public int getTotalBooksOut() {
         for (Book b : books) {
-            if (b.isBorrowedStatus() == true) {
+            if (!b.isBorrowedStatus()) {
                 totalBooksOut++;
             }
         }
@@ -120,7 +123,7 @@ public class Library implements ManageLibrary {
      * add a librarian name
      * @param librarianName librarian name
      */
-    public void addLibrarian(String librarianName) {
+    public void addLibrarian(Librarian librarianName) {
         this.librarian = librarianName;
     }
 
@@ -128,7 +131,7 @@ public class Library implements ManageLibrary {
      * @return name of librarian
      */
     public String getLibrarian() {
-        return librarian;
+        return librarian.getName();
     }
 
     /**

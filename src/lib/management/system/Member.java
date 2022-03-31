@@ -15,7 +15,7 @@ public class Member {
     private int id;
     private String name;
     private List <String> booksBorrowed;
-
+    private List <LocalDate> overDue;
 
     /**
      * create a new member
@@ -27,6 +27,7 @@ public class Member {
         this.id = id;
         this.name = name;
         this.booksBorrowed = new ArrayList<String>();
+        this.overDue = new ArrayList<LocalDate>();
     }
 
     /**
@@ -45,6 +46,10 @@ public class Member {
 
     public List<String> getBorrowedBooks(){
         return this.booksBorrowed;
+    }
+
+    public List<LocalDate> getOverDue() {
+        return overDue;
     }
 
     /**
@@ -83,5 +88,25 @@ public class Member {
                 ", name='" + this.getName() + '\'' +
                 ", booksBorrowed=" + this.getBorrowedBooks()
                 ;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        // If the object is compared with itself then return true
+        if (o == this) {
+            return true;
+        }
+        /* Check if o is an instance of Book or not
+          "null instanceof [type]" also returns false */
+        if (!(o instanceof Member)) {
+            return false;
+        }
+
+        // typecast o to Book so that we can compare data members
+        Member m = (Member) o;
+
+        // Compare the data members and return accordingly
+        return Integer.compare(id, m.id) == 0;
+
     }
 }
