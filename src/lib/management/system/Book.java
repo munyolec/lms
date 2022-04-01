@@ -13,7 +13,7 @@ public class Book {
     private String borrowerName;
     private LocalDate borrowedDate;
     private LocalDate returnDate;
-    private LocalDate overDue;
+    private Boolean isOverDue;
 
 
     /**
@@ -30,7 +30,7 @@ public class Book {
         this.borrowerName = null;
         this.borrowedDate = null;
         this.returnDate = null;
-        this.overDue = null;
+        this.isOverDue = false;
     }
 
     /**
@@ -89,14 +89,18 @@ public class Book {
 
     public void setReturnDate(LocalDate dueDate) {
         this.returnDate = dueDate;
+        setOverDue();
     }
-
-    public void setOverDue(LocalDate date) {
-        this.overDue = date;
+    public void setOverDue() {
+        if(getReturnDate() == null){
+            isOverDue = false;
+        }
+        else if (getReturnDate().isBefore(LocalDate.now())){
+            isOverDue = true;
+        }
     }
-
-    public LocalDate getOverDue(){
-        return overDue;
+    public boolean getOverDue(){
+        return isOverDue;
     }
     @Override
     public boolean equals(Object o) {
@@ -119,11 +123,16 @@ public class Book {
     }
 
 
-    @Override
-    public String toString() {
-        return ", title='" + title + '\'' +
-                ", borrowedDate=" + borrowedDate +
-                ", returnDate=" + returnDate
-                ;
-    }
+//    @Override
+//    public String toString() {
+//        return "Book{" +
+//                "id=" + id +
+//                ", title='" + title + '\'' +
+//                ", borrowedStatus=" + borrowedStatus +
+//                ", borrowerName='" + borrowerName + '\'' +
+//                ", borrowedDate=" + borrowedDate +
+//                ", returnDate=" + returnDate +
+//                ", overDue=" + isOverDue+
+//                '}';
+//    }
 }

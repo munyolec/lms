@@ -39,9 +39,8 @@ public class Main {
         librarian.addBook(book2);
         librarian.addBook(book3);
         librarian.addBook(book4);
-        librarian.addBook(book5);
-//        newLibrary.addBook(book6);
-        librarian.addBook(book6);
+//        librarian.addBook(book5);
+//        librarian.addBook(book6);
 
         System.out.println(newLibrary.getLibName() + " Summary :\n"
                 + newLibrary.getBooks().stream().count()+ " book(s)  \n" +
@@ -51,18 +50,24 @@ public class Main {
 
         //issue books
         librarian.issueBook(member1, book1);
+
+        //set return and borrow date
+        book1.setBorrowedDate(LocalDate.of(2022,3,19));
+        book1.setReturnDate(LocalDate.of(2022,3,30));;
+
+        //return book
+        member1.returnBook(book1);
         librarian.issueBook(member1, book2);
         librarian.issueBook(member1, book3);
 
         //member cannot have more than 3 borrowed books
-        newLibrary.issueBook(member2, book4);
 
-
-        //return book
-//        member1.returnBook(book1);
-//        member2.returnBook(book2);
+//        member1.returnBook(book2);
+        librarian.issueBook(member1, book4);
+//
         System.out.println();
         System.out.println("Member one has borrowed: "+ newLibrary.getBorrowedBooks(member1));
+//
         System.out.println();
 //
 
