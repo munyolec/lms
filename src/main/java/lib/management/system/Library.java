@@ -137,7 +137,7 @@ public class Library  {
     public List<String> getBorrowedBooks(Member member) {
         if (members.contains(member)) {
             try {
-                return member.getBorrowedBooks();
+                return member.getBorrowedBookTitle();
             }catch (NullPointerException e){
                 System.out.println("No Books borrowed");
             }

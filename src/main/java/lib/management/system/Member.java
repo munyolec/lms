@@ -44,10 +44,10 @@ public class Member {
         return name;
     }
 
-    public List<String> getBorrowedBooks(){
+    public List<String> getBorrowedBookTitle(){
         return this.booksBorrowedTitle;
     }
-    public List<Book> getBorrowedBooks2(){
+    public List<Book> getBorrowedBooksObject(){
         return booksBorrowed;
     }
     public void setHasOverDue(boolean hasOverDue){
@@ -64,12 +64,12 @@ public class Member {
      * @param book list of book borrowed
      */
     public void borrowBook(Book book) {
-        for(Book b : getBorrowedBooks2()){
+        for(Book b : getBorrowedBooksObject()){
             if(b.getOverDue() == true) {
                 setHasOverDue(true);
             }
         }
-        if (getBorrowedBooks().size() < 3) {
+        if (getBorrowedBookTitle().size() < 3) {
             if(getHasOverDue() == false){
                 if (book.isBorrowedStatus() == false) {
                     book.updateBorrowedStatus(true);
@@ -103,7 +103,7 @@ public class Member {
         return
                 "id=" + this.getId() +
                 ", name='" + this.getName() + '\'' +
-                ", booksBorrowed=" + this.getBorrowedBooks()
+                ", booksBorrowed=" + this.getBorrowedBookTitle()
                 ;
     }
 

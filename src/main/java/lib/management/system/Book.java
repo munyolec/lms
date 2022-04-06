@@ -126,17 +126,10 @@ public class Book {
 
     }
 
-
     @Override
     public String toString() {
         return "Book{" +
                 "id=" + id +
-//                ", title='" + title + '\'' +
-//                ", borrowedStatus=" + borrowedStatus +
-//                ", borrowerName='" + borrowerName + '\'' +
-//                ", borrowedDate=" + borrowedDate +
-//                ", returnDate=" + returnDate +
-//                ", overDue=" + isOverDue+
                 '}';
     }
 }

@@ -24,22 +24,30 @@ public class MemberClassTest {
     }
 
     @Test
-    @DisplayName("test default hasOverDue is false")
-    public void testHasOverDue() {
-        assertEquals(false, member.getHasOverDue());
-    }
-
-    @Test
-    @DisplayName("test set hasOverDue to true")
-    public void testSetOverDueTrue() {
-        member.setHasOverDue(true);
-        assertEquals(true, member.getHasOverDue());
-    }
-
-    @Test
     @DisplayName("test default borrowed books array is empty")
-    public void testGetBorrowedBooks() {
-        assertEquals(Arrays.asList(), member.getBorrowedBooks());
+    public void testGetBorrowedBooksTitles() {
+        assertEquals(Arrays.asList(), member.getBorrowedBookTitle());
+    }
+
+
+    @Test
+    public void testGetBorrowedBooksObject() {
+        assertThat(member.getBorrowedBooksObject()).isEmpty();
+    }
+
+
+    @Test
+    @DisplayName("Given a new member account default overdue status is false")
+    public void testGetHasOverDue(){
+        Member member = new Member(1, "Member One");
+        assertThat(member.getHasOverDue()).isFalse();
+    }
+    @Test
+    @DisplayName("Test set HasOverDue to true")
+    public void testSetHasOverDue(){
+        Member member = new Member(1, "Member One");
+        member.setHasOverDue(true);
+        assertThat(member.getHasOverDue()).isTrue();
     }
 
     @Test
@@ -47,19 +55,19 @@ public class MemberClassTest {
     public void testBorrowBook() {
         Book book = new Book(1, "Book One");
         member.borrowBook(book);
-        assertEquals(Arrays.asList("Book One"), member.getBorrowedBooks());
+        assertEquals(Arrays.asList("Book One"), member.getBorrowedBookTitle());
     }
 
     @Test
     @DisplayName("Member cannot borrow more than 3 books")
     public void testBorrowLimit() {
         Book book = new Book(1, "Book One");
-        assumingThat(member.getBorrowedBooks().size() >= 3,
+        assumingThat(member.getBorrowedBookTitle().size() >= 3,
                 () -> {
                     member.borrowBook(book);
                 });
-        assertThat(member.getBorrowedBooks()).hasSize(0);
-        assertNotEquals(Arrays.asList("Book One"), member.getBorrowedBooks());
+        assertThat(member.getBorrowedBookTitle()).hasSize(0);
+        assertNotEquals(Arrays.asList("Book One"), member.getBorrowedBookTitle());
     }
 
     @Test
@@ -68,8 +76,8 @@ public class MemberClassTest {
         Book book = new Book(1, "Book One");
         book.updateBorrowedStatus(true);
         member.borrowBook(book);
-        assertNotEquals(Arrays.asList("Book One"), member.getBorrowedBooks());
-        assertEquals(Arrays.asList(), member.getBorrowedBooks());
+        assertNotEquals(Arrays.asList("Book One"), member.getBorrowedBookTitle());
+        assertEquals(Arrays.asList(), member.getBorrowedBookTitle());
     }
 
     @Test
@@ -79,8 +87,8 @@ public class MemberClassTest {
         Member member2 = new Member(2, "Member two");
         member2.setHasOverDue(true);
         member2.borrowBook(book);
-        assertNotEquals(Arrays.asList("Book One"), member2.getBorrowedBooks());
-        assertEquals(Arrays.asList(), member2.getBorrowedBooks());
+        assertNotEquals(Arrays.asList("Book One"), member2.getBorrowedBookTitle());
+        assertEquals(Arrays.asList(), member2.getBorrowedBookTitle());
     }
 
     @Test
@@ -89,8 +97,8 @@ public class MemberClassTest {
         Book book = new Book(1, "Book One");
         member.borrowBook(book);
         member.returnBook(book);
-        assertNotEquals(Arrays.asList("Book One"), member.getBorrowedBooks());
-        assertEquals(Arrays.asList(), member.getBorrowedBooks());
+        assertNotEquals(Arrays.asList("Book One"), member.getBorrowedBookTitle());
+        assertEquals(Arrays.asList(), member.getBorrowedBookTitle());
     }
 
     @Test
@@ -98,6 +106,15 @@ public class MemberClassTest {
     public void testEquals(){
         Member member2 = new Member(1, "Member One");
         assertTrue(member.equals(member2));
+    }
+
+    @Test
+    public void testToString()
+    {
+        Member member2 = new Member(1, "Member One");
+        String expected = "id=1, name='Member One', booksBorrowed=[]";
+        assertThat(member2.toString()).isEqualTo(expected);
+
     }
 
 }

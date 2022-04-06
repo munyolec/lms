@@ -1,4 +1,5 @@
 import lib.management.system.Book;
+import lib.management.system.Member;
 import org.junit.jupiter.api.*;
 
 import java.time.LocalDate;
@@ -17,6 +18,13 @@ public class BookClassTest {
     public void testGetTitle(){
         assertEquals("Book One", book.getTitle());
     }
+
+    @Test
+    @DisplayName("test Get Book ID")
+    public void testGetId(){
+        assertThat(book.getId()).isEqualTo(1);
+    }
+
 
     @Test
     @DisplayName("test Default borrowed status is false")
@@ -106,6 +114,14 @@ public class BookClassTest {
         assertTrue(book.equals(book2));
     }
 
+    @Test
+    public void testToString()
+    {
+        Book book = new Book(1,"Book One");
+        String expected = "Book{id=1}";
+        assertThat(book.toString()).isEqualTo(expected);
+
+    }
 }
 
 
