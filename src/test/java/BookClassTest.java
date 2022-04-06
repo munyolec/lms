@@ -3,6 +3,7 @@ import org.junit.jupiter.api.*;
 
 import java.time.LocalDate;
 
+import static org.assertj.core.api.Java6Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assumptions.*;
 
@@ -33,33 +34,33 @@ public class BookClassTest {
     @Test
     @DisplayName("test Default borrowed name null")
     public void testGetBorrowerName(){
-        assertEquals(null, book.getBorrowerName());
+        assertThat(book.getBorrowerName()).isNull();
     }
 
     @Test
     @DisplayName("test Update borrower name")
     public void testUpdateBorrowerName(){
         book.updateBorrowerName("Member One");
-        assertEquals("Member One", book.getBorrowerName());
+        assertThat(book.getBorrowerName()).isEqualTo("Member One");
     }
 
     @Test
     @DisplayName("test Default borrowed date null")
     public void testGetBorrowedDate(){
-        assertEquals(null, book.getBorrowedDate());
+        assertThat(book.getBorrowedDate()).isNull();
     }
 
     @Test
     @DisplayName("test set borrow date")
     public void testUpdateBorrowedDate(){
         book.setBorrowedDate(LocalDate.of(2022,3,19));
-        assertEquals(LocalDate.of(2022,3,19), book.getBorrowedDate());
+        assertThat( book.getBorrowedDate()).isEqualTo(LocalDate.of(2022,3,19));
     }
 
     @Test
     @DisplayName("test default borrow date is null")
     public void testDefaultReturnDate(){
-        assertEquals(null, book.getReturnDate());
+        assertThat(book.getReturnDate()).isNull();
     }
 
     @Test

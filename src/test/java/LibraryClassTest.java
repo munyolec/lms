@@ -80,14 +80,11 @@ public class LibraryClassTest {
     @DisplayName("Cannot add duplicate members")
     public void testAddMembersMemberExists() {
         Member member = new Member(1, "Member One");
-
         assumingThat(library.getMembers().contains(member),() ->
         {
             library.addMember(member);
         });
-
         assertThat(library.getMembers()).hasSize(0);
-
     }
 
     @Test
@@ -104,7 +101,6 @@ public class LibraryClassTest {
     @DisplayName("test librarian does not exists")
     public void testLibrarianDoesNotExist() {
         assertThat(library.getLibrarian()).isNull();
-
     }
 
     @Test
@@ -123,7 +119,6 @@ public class LibraryClassTest {
         library.addBook(book);
         library.addMember(member);
         library.issueBook(member,book);
-
         assertThat(library.getBooks()).contains(book);
         assertThat(library.getBooks().contains(member));
         assertThat(library.getBorrowedBooks(member)).isNotEmpty().hasSize(1);
