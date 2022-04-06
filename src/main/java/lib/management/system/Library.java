@@ -10,7 +10,7 @@ public class Library  {
     private Librarian librarian;
     private static List<Member> members;
     private static List<Book> books;
-    private  int totalBooksOut;
+    private int totalBooksOut;
 
     /**
      * create a new library
@@ -77,6 +77,7 @@ public class Library  {
             members.add(memberAdded);
         }
     }
+
     /**
      * remove a member from the list
      *
@@ -87,11 +88,32 @@ public class Library  {
     }
 
     /**
+     * add a librarian name
+     * @param librarianName librarian name
+     */
+    public void addLibrarian(Librarian librarianName) {
+        this.librarian = librarianName;
+    }
+
+    /**
+     * @return name of librarian
+     */
+    public String getLibrarian() {
+        try {
+            return librarian.getName();
+        } catch (NullPointerException e) {
+            System.out.println("Librarian not yet added");
+        }
+        return null;
+    }
+
+
+    /**
      * @return number of borrowed books
      */
     public int getTotalBooksOut() {
         for (Book b : books) {
-            if (!b.isBorrowedStatus()) {
+            if (b.isBorrowedStatus() == true) {
                 totalBooksOut++;
             }
         }
@@ -114,31 +136,16 @@ public class Library  {
 
     public List<String> getBorrowedBooks(Member member) {
         if (members.contains(member)) {
-            return member.getBorrowedBooks();
+            try {
+                return member.getBorrowedBooks();
+            }catch (NullPointerException e){
+                System.out.println("No Books borrowed");
+            }
         }
         return null;
     }
-//    public void getBookOverDue(Member member) {
-//        if (members.contains(member)) {
-//            return member.getBorrowedBooks2();
-//        }
-//        return null;
-//    }
 
-    /**
-     * add a librarian name
-     * @param librarianName librarian name
-     */
-    public void addLibrarian(Librarian librarianName) {
-        this.librarian = librarianName;
-    }
 
-    /**
-     * @return name of librarian
-     */
-    public String getLibrarian() {
-        return librarian.getName();
-    }
 
     /**
      * show details of books in the library

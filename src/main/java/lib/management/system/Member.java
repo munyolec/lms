@@ -13,7 +13,6 @@ public class Member {
     private String name;
     private List <String> booksBorrowedTitle;
     private List <Book> booksBorrowed;
-//    private LocalDate  overDue;
     private boolean hasOverDue;
 
     /**
@@ -49,7 +48,6 @@ public class Member {
         return this.booksBorrowedTitle;
     }
     public List<Book> getBorrowedBooks2(){
-
         return booksBorrowed;
     }
     public void setHasOverDue(boolean hasOverDue){
