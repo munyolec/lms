@@ -47,9 +47,11 @@ public class Member {
     public List<String> getBorrowedBookTitle(){
         return this.booksBorrowedTitle;
     }
+
     public List<Book> getBorrowedBooksObject(){
         return booksBorrowed;
     }
+
     public void setHasOverDue(boolean hasOverDue){
         this.hasOverDue = hasOverDue;
     }
